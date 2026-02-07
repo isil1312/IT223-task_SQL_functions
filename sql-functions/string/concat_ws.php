@@ -1,0 +1,44 @@
+<?php
+include '../../db.php';
+$sql = "SELECT CONCAT_WS(', ', first_name, last_name, department) AS employee_info FROM employees";
+$result = $conn->query($sql);
+?>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONCAT_WS() Function</title>
+</head>
+
+<style>
+    
+    table, th, td{
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 5px;
+    }
+</style>
+
+<body>
+    <h2>CONCAT_WS() Function</h2>
+    <p>Adds two or more expressions together with a separator.</p>
+    <p><b>SQL Query:</b></p>
+    <p><?php echo $sql; ?></p>
+    <p><b>Results:</b></p>
+    <table>
+        <tr>
+            <th>Employee Info</th>
+        </tr>
+        <?php
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr><td>" . $row['employee_info'] . "</td></tr>";
+        }
+        $conn->close();
+        ?>
+    </table>
+    <p><a href="../../index.php">Back</a></p>
+</body>
+
+</html>
